@@ -6,7 +6,7 @@ categories: [how-to, code, case, selection, quantitative]
 image: "titleimage.jpg"
 ---
 
-**Welcome to this blog post about the wonders of case selection in quantitative methods!**
+**Welcome to this blog post about case selection with quantitative methods!**
 
 # Macro or micro?
 

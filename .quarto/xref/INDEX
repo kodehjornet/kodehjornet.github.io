@@ -28,5 +28,16 @@
   },
   "index.qmd": {
     "index.html": "a95f3461"
+  },
+  "posts/ai_coding/index.qmd": {
+    "index.html": "71a27aa8",
+    "index.tex": "2c027d3c"
+  },
+  "readme.md": {
+    "readme.html": "c037da2f"
+  },
+  "posts/geom_count/index.qmd": {
+    "index.html": "c11155ea",
+    "index.tex": "a3b9b914"
   }
 }

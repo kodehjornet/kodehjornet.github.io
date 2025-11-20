@@ -1,0 +1,54 @@
+---
+title: "Koding med AI"
+author: 
+  - name: Kristine Vanebo-Bøe
+    url:  "https://www.linkedin.com/in/kristine-vanebo-boe/"
+toc: true
+number-sections: true
+format:
+  html: default
+  pdf: default
+lightbox: true
+lang: nb
+editor_options: 
+  chunk_output_type: console
+---
+
+## Koding med AI
+
+AI-verktøy som *ChatGPT* kan være svært nyttige hjelpemidler for studenter som lærer seg å programmere i `R`. Modellen kan forklare kode, gi forslag til løsninger, hjelpe deg å forstå feilmeldinger og vise hvordan ulike funksjoner fungerer i praksis. Men for å få best mulig utbytte, er det viktig å vite hvordan man bruker verktøyet riktig og kritisk.
+
+Det aller viktigste er å være spesifikk når du stiller spørsmål. *ChatGPT* gir mye bedre svar når du tydelig forklarer hva du holder på med. For eksempel bør du skrive hvilke pakker du allerede har lastet inn (for eksempel `tidyverse` eller `bst290`), hvilket datasett du bruker, hvilke variabler som er relevante, og hva du allerede har prøvd. Da slipper du generelle svar, og får heller kode som passer til akkurat ditt prosjekt.
+
+Et vanlig problem er at *ChatGPT* ofte legger inn kode for å laste inn pakker – som `library(tidyverse)` – hver gang du spør om noe. Det er ikke nødvendig å kopiere dette inn hver gang i `R`-skriptet ditt. Du trenger bare å laste inn pakkene én gang øverst i koden. Når man ser mange slike `library()`-linjer flere steder i en oppgave, kan det dessuten være et tydelig tegn på at *ChatGPT* har blitt brukt uten redigering. Det kan derfor være lurt å rydde litt i koden og fjerne unødvendige gjentakelser før du leverer.
+
+En annen ting man må være oppmerksom på, er at *ChatGPT* noen ganger foreslår løsninger som bruker pakker du ikke har installert, eller som ikke brukes i kurset ditt. Verktøyet har tilgang til et bredt utvalg av `R`-pakker, og foreslår derfor ofte funksjoner fra verktøy som ikke nødvendigvis er relevante. Da er det viktig å bruke egen vurdering: sjekk alltid at pakken faktisk finnes, og at du forstår hva koden gjør. Hvis ikke, bør du heller spørre om en løsning som kun bruker de pakkene dere bruker i undervisningen.
+
+Ved å simpelt spørre *ChatGPT* om den kan hjelpe deg med å lage et histogram i R vil den for eksempel gi deg forslag på om du vil bruke `Base R` eller `ggplot2`. I kurset bruker vi ikke `Base R`, og vi bruker også andre pakker enn `ggplot2` (`ggplot2` er inkludert `tidyverse`). I tillegg vil den ikke kunne gi deg en kode som er tilpasset dine behov, med datasettet du bruker samt variablene du ser på. Denne koden vil derfor ikke gå an å bruke i `R`.
+
+![](pe_fig1.png)
+
+![](pe_fig2.png)
+
+Ved å spesifisere at jeg har lastet inn pakkene og at jeg bruker `tidyverse`, gir `R` meg en bedre kode på et grunnleggende histogram, men det er fortsatt upresist og jeg vil ikke kunne bruke koden direkte inn i `R`.
+
+![](pe_fig3.png)
+
+![](pe_fig4.png)
+
+
+Hvis jeg så legger til hvilket datasett jeg bruker, variablene jeg vil se på og landet jeg vil forholde meg til gir den meg en mye mer utfyllende kode på et histogram som jeg kan bruke direkte inn i `R`. 
+
+![](pe_fig5.png)
+
+Den gir meg da to koder til histogram av både `rlgdgr` og `agea`, som man kan kopiere rett inn i `R`. Til tross for at jeg har fortalt *ChatGPT* at jeg allerede har lastet inn `tidyverse`-pakken inkluderes den før koden til selve grafen. I tillegg får jeg feilmelding i `R` når jeg prøver å bruke koden til histogram av religiøsitet, fordi den ikke har lagt inn at variabelen `rlgdgr` er nødt til å bli gjort om til numerisk for å utføre koden.
+
+Resultatet av histogrammet av religiøsitet ser slik ut og er fullt mulig å bruke i oppgaver for å vise fordelingen av religiøsitet:
+
+![](pe_fig6.png)
+
+For å gjøre det enklere å bruke *ChatGPT* effektivt kan du lage en fast struktur når du spør. Du kan for eksempel skrive: “Jeg jobber i `R` med datasettet ESS runde 7, og har lastet inn `tidyverse` og `bst290`. Variablene jeg bruker er `essround`, `cntry`, `idno`, `agea` og `rlgdgr`. Jeg skal se på data fra Norge. Jeg har trimmet datasettet til å kun inkludere disse variablene fra Norge og navngitt det `ess7`, samt fjernet NAs. Jeg vil lage et univariat histogram som viser fordelingen av `rlgdgr`. Kan du lage en kode for dette, med 10 bins i tema svart/hvitt, og at teksten på y-aksen er «Number of observations» og på x-aksen «How religious are you (0-10)»?»
+
+![](pe_fig7.png)
+
+Til slutt er det viktig å huske at *ChatGPT* er et støtteverktøy, ikke en erstatning for egen forståelse. Det beste er å bruke svarene som forklaringer eller inspirasjon, og ikke bare kopiere koden direkte. Ved å kombinere egne ferdigheter med AI-hjelp lærer du både mer og jobber mer effektivt – uten å miste kontrollen over det faglige innholdet.
