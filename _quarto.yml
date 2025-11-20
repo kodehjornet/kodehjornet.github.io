@@ -1,0 +1,18 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "KODEHJØRNET // THE CODING CORNER"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/kodehjornet/kodehjornet.github.io
+format:
+  html:
+    theme: journal
+    css: styles.css
+  
+editor: visual
+

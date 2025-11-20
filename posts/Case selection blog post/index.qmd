@@ -1,0 +1,25 @@
+---
+title: "Case selection 101"
+author: "Knut Solvig"
+date: "2023-09-05"
+categories: [how-to, code, case, selection, quantitative]
+image: "titleimage.jpg"
+---
+
+**Welcome to this blog post about the wonders of case selection in quantitative methods!**
+
+# Macro or micro?
+
+One crucial step when starting your study is to decide what kind of concept you wish to measure.
+
+## Micro cases
+
+Micro cases looks at individual cases. For example, the European Social Survey dataset (ESS) is a typical micro case dataset. Here you will find observations from individuals and their answers on different questions.
+
+## Macro cases
+
+Further, you can also choose a macro case, which is to look at a research question from a national or international perspective. Here you for example compare the democratic value of a country with another country.
+
+One important thing to note when selecting your case is that you need to be able to justify why your case is the best for answering your research question. For example, do not choose to look at Norway as a case and justify it with "I live in Norway, therefore I want to look at Norway". This is not a methodologically correct way of doing it. Instead, you can say that "previous research has looked at this phenomena through the lens of American countries, but by using Theory X it should also be the case in an European country like Norway."
+
+*Photo by [CHUTTERSNAP](https://unsplash.com/@chuttersnap?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/gDDas5_ALRw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)*

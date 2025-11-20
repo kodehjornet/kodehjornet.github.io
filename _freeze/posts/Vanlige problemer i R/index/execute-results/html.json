@@ -1,0 +1,14 @@
+{
+  "hash": "f2201ab97481c296c6a68c03921f4a13",
+  "result": {
+    "markdown": "---\ntitle: \"Vanlige problemer i R\"\nauthor: \"Karoline Rugaard\"\ndate: \"2023-11-14\"\ncategories: [how-to, norwegian, problem]\nimage: \"Tim_Gouw.jpg\"\n---\n\n\nHer er svar på noen vanlige problemer i R.\n\n**Problem**\n\nJeg har lastet ned ESS-datasettet fra dataportalen og har prøvd å åpne det ved å dobbeltklikke på filen, men dataen min sier «det finnes ikke programvare til å åpne filen». Deretter prøvde jeg å åpne det i RStudio, men fikk en error som sa at «filen er for stor». Hva skal jeg gjøre annerledes?\n\n**Løsning**\n\nImportering av et datasett til *R/RStudio* er ikke helt det samme som å åpne et Word-dokument, hvor det å dobbeltklikke vil fungere.\n\nDenne prosessen er forklart i [Tutorial 2](https://github.com/cknotz?tab=repositories) (chapter 4). For å importere et datasett må man gjøre følgende:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# This imports the dataset and saves it as \"ess\"\ness <- haven::read_dta(\"nameofyourdatasetfile.dta\")\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# This then converts the dataset to an easier-to-use format\ness <- labelled::unlabelled(ess)\n```\n:::\n\n\nI tillegg må man også forsikre seg om a) at det rette prosjektet (*Project)* er aktivt i *RStudio*; b) at datasett-filen man ønsker å importere er i prosjektmappa (*Project folder*); og c) at man har de nødvendige pakkene installert (dersom nødvendig, skriver man disse kommandoene i konsollen (*Console)*:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Først\ninstall.packages(\"haven\")\n# Deretter\ninstall.packages(\"labelled\")\n```\n:::\n\n\n**Problem**\n\nPotensielt problem som kan forekomme ved \"transformering\" av datasettfilen med `labelled::unlabelled()` \n\nEtter å ha importert datasettfilen til Rstudio med haven-pakken, så burde man alltid \"transformere\" datasettfilen med `labelled::unlabelled()` (Tutorial 2).\n\nDa kan følgende \"error\" forekomme:\n\n`` Error in `validate_labelled()`: `` \n\n`` ! `labels` must be unique ``\n\nDette skyldes sannsynligvis datasettfilen som er gitt på hjemmesiden til ESS.\n\n**Løsning**\n\nMan kan forsøke å laste ned filen i et annet format fra hjemmesiden til *ESS*. Hvis man for eksempel laster ned datasettet som en Stata-fil (`.dta`) og man får erroren etter man har importert filen med `read_dta()`, kan man i stedet forsøke å laste ned datasettet som SPSS-fil (`.sav`) og importere det med  `read_sav()`.\n\nFoto av Tim Gouw på [Unsplash](https://unsplash.com/photos/man-wearing-white-top-using-macbook-1K9T5YiZ2WU).\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

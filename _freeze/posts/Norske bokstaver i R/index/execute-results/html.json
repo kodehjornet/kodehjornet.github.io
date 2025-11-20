@@ -1,0 +1,14 @@
+{
+  "hash": "84e9e9038c1fcd59064bbaa133c5328e",
+  "result": {
+    "markdown": "---\ntitle: \"Problemer med Norske bokstaver i R? (ÆØÅ)\"\nauthor: \"Petter Knardahl\"\ndate: \"2023-11-13\"\ncategories: [how-to, norwegian, bug]\nimage: \"bugmac.jpg\"\n---\n\n\nHei! Dette er en post som viser noen løsninger på problemer med norske bokstaver i R. Det ser ut til at noen versjoner av R/Rstudio har problemer med å lese de norske bokstavene: Æ, Ø og Å. For å løse dette problemet anbefaler jeg først å sjekke om du har installers den siste versjonen av R og Rstudio.\n\nDu kan kjapt sjekke om det fungerer ved å skrive dette inn i console:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nprint(\"æ\")\n```\n:::\n\n\nDersom det ikke fungerer så har du tre løsninger.\n\n**Løsning 1:**\n\nPrøv å sett Locale navnet til Nynorsk eller bokmål ved å skrive dette inn i console:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nSys.setlocale(\"LC_ALL\", \"nb_NO.UTF-8\")\n```\n:::\n\n\nEller\n\n\n::: {.cell}\n\n```{.r .cell-code}\nSys.setlocale(\"LC_ALL\",\"nn_NO.UTF-8\")\n```\n:::\n\n\nAvhengig av operativsystemet ditt og dens konfigurasjoner så kan det hende at en av disse fungerer. Dersom det ikke fungerer, gå videre til løsning 2.\n\n**Løsning 2:**\n\nPå min macbook så fungerte ikke løsning 1. Jeg prøvde istedenfor å sette Locale til engelsk med UTF-8 kode. UTF-8 skal fortsatt støtte norske bokstaver. Dette fungerte for meg:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nSys.setlocale(\"LC_ALL\",\"en_US.UTF-8\")\n```\n:::\n\n\nEn ting å ha i bakhodet er at dette ikke er en langvarig \"fix\". For hver gang du åpner R og planlegger å bruke norske bokstaver så må du utføre koden på nytt.\n\n**Løsning 3:**\n\nEn langvarig løsning som fungerte for meg var å endre \".Renviron\" filen din i R. Du kan finne denne filen ved å skrive dette inn i R:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nfile.edit(\"~/.Renviron\")\n```\n:::\n\n\nDeretter må du skrive og lagre:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nLC_ALL=\"en_US.UTF-8\"\n```\n:::\n\n\nHåper dette var til hjelp! Anbefaler å sjekke ut [denne](https://github.com/rstudio/rstudio/issues/12668) diskusjonen på Github dersom du fortsatt har problemer.\n\nForsidefoto av Christopher Gower på [Unsplash](https://unsplash.com/photos/a-macbook-with-lines-of-code-on-its-screen-on-a-busy-desk-m_HRfLhgABo)\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

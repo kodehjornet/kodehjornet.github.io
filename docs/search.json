@@ -1,0 +1,184 @@
+[
+  {
+    "objectID": "posts/Norske bokstaver i R/index.html",
+    "href": "posts/Norske bokstaver i R/index.html",
+    "title": "Problemer med Norske bokstaver i R? (ÆØÅ)",
+    "section": "",
+    "text": "Hei! Dette er en post som viser noen løsninger på problemer med norske bokstaver i R. Det ser ut til at noen versjoner av R/Rstudio har problemer med å lese de norske bokstavene: Æ, Ø og Å. For å løse dette problemet anbefaler jeg først å sjekke om du har installers den siste versjonen av R og Rstudio.\nDu kan kjapt sjekke om det fungerer ved å skrive dette inn i console:\n\nprint(\"æ\")\n\nDersom det ikke fungerer så har du tre løsninger.\nLøsning 1:\nPrøv å sett Locale navnet til Nynorsk eller bokmål ved å skrive dette inn i console:\n\nSys.setlocale(\"LC_ALL\", \"nb_NO.UTF-8\")\n\nEller\n\nSys.setlocale(\"LC_ALL\",\"nn_NO.UTF-8\")\n\nAvhengig av operativsystemet ditt og dens konfigurasjoner så kan det hende at en av disse fungerer. Dersom det ikke fungerer, gå videre til løsning 2.\nLøsning 2:\nPå min macbook så fungerte ikke løsning 1. Jeg prøvde istedenfor å sette Locale til engelsk med UTF-8 kode. UTF-8 skal fortsatt støtte norske bokstaver. Dette fungerte for meg:\n\nSys.setlocale(\"LC_ALL\",\"en_US.UTF-8\")\n\nEn ting å ha i bakhodet er at dette ikke er en langvarig “fix”. For hver gang du åpner R og planlegger å bruke norske bokstaver så må du utføre koden på nytt.\nLøsning 3:\nEn langvarig løsning som fungerte for meg var å endre “.Renviron” filen din i R. Du kan finne denne filen ved å skrive dette inn i R:\n\nfile.edit(\"~/.Renviron\")\n\nDeretter må du skrive og lagre:\n\nLC_ALL=\"en_US.UTF-8\"\n\nHåper dette var til hjelp! Anbefaler å sjekke ut denne diskusjonen på Github dersom du fortsatt har problemer.\nForsidefoto av Christopher Gower på Unsplash"
+  },
+  {
+    "objectID": "posts/Test blog from the Coding Corner/index.html",
+    "href": "posts/Test blog from the Coding Corner/index.html",
+    "title": "Welcome to the Coding Corner!",
+    "section": "",
+    "text": "Welcome to the Coding Corner! This is a project from the Institute of Media and Social Sciences at the University of Stavanger.\nThis blog is created to help you as a student (and employee) to understand the different things which revolve around the quantitative methods universe. These blog posts are created during the Coding corner seminars.\nAre you interested in us creating a blog post about something which you want to learn more about? Feel free to send an email to codinghjornet@gmail.com."
+  },
+  {
+    "objectID": "posts/Linaer funksjon/index.html",
+    "href": "posts/Linaer funksjon/index.html",
+    "title": "Lineær funksjon og prediktive modeller",
+    "section": "",
+    "text": "Hva er regresjon?\nMange studenter har glemt hva de lærte om regresjon på videregående skole. Dette innlegget har som hensikt å gi en oppfriskning ved å vise det mest grunnleggende innen regresjon: den lineære funksjonen.\nRegresjonskoffisienter er et statistisk mål på forholdet mellom variabler. Når vi beregner regresjonskoffisienter, bruker vi regresjonsanalyse. Det finnes mange forskjellige former for regresjonsanalyse som brukes til mange ulike formål.\n\n\nRegresjonslinjen\nRegresjonsanalyse gir oss en linje som beskriver korrelasjonen mellom våre variabler. Det er denne linjen som er grunnlaget for all regresjonsanalyse.\n\n\nDen matematiske lineære funksjonen\nI matematikken representerer en lineær funksjon en rett linje når den plottes i et koordinatsystem. Den kan beskrives med formelen: \n\\(Y = a + bX\\)\nI denne funksjonen indikerer konstantleddet, a, gjennomsnittsverdien av Y når X er lik null. Helningskoffisienten, b, indikerer hvor mye Y i gjennomsnitt øker eller minker for en enhets økning i X.\nNår b er større en null er effekten positiv: En økning i X fører til en økning i Y, og en reduksjon i X resulterer i en reduksjon i Y. For eksempel, hvis b er lik 5, øker Y med 5 enheter når X øker med 1 enhet.\nNår b er mindre en null, er effekten negativ: Hvis X øker, minker Y, og hvis X minker, øker Y. Hvis, for eksempel, b er lik -2, minker Y med to enheter når X øker med en enhet.\n\n\nDen statistiske lineære funksjonen\nDen statistiske lineære funksjonen, spesifikt innenfor konteksten av enkel lineær regresjon, har en lignende form som den matematiske lineære funksjonen, men tolkningen og konteksten er noe annerledes. Formelen er:\n\\(Y = β_0 + β_1X + ϵ\\)\nHer representerer:\n\n\\(Y\\) er den avhengige variabelen vi ønsker å forklare\n\\(X\\) er den uavhengige variabelen vi bruker for å gjøre forklaringene\n\\(B_0\\) (Beta null) er konstantleddet, eller den forventede verdien av Y når X = 0\n\\(Β_1\\) (Beta en) er helningskoffisienten, eller endringen i Y for en enhetsendring i X.\n\\(ϵ\\) (Epsilon) er en tilfeldig feilterm som fanger opp alle andre faktorer som påvirker Y men som ikke er inkludert i modellen.\n\nDen statistiske lineære funksjonen brukes til å modellere forholdet mellom to variabler ved å tilpasse en lineær funksjon til de obeserverte dataene. Da kan man analysere hvordan endringer i den uavhengige variabelen er assosiert med endringer i den avhengige variabelen.\n\n\nEn lineær funksjon i R\nI dette eksempelet vil jeg bruke datasettet ´mtcars´ som kommer forhåndsinstallert i R. Jeg er interessert i å finne ut av hvor mye drivstoff en bil bruker på en gitt avstand (Miles per Gallon) i forhold til dens vekt (Weight).\nJeg har laget en spredningsplott med en lineær regresjonslinje som viser forholdet mellom ´mpg´ (Miles per Gallon) og ´wt´ (bilens vekt i 1000 lbs).\n\n## Linear function in R ##\n\n# Loading package and dataset\nlibrary(tidyverse)\n\n# Fitting a linear model\nmodel &lt;- lm(mpg ~ wt, data = mtcars)\n\n# Extracting coefficients\nintercept &lt;- round(coef(model)[1], 2)\nslope &lt;- round(coef(model)[2], 2)\n\n# Creating the functions string\nequation &lt;- paste(\"mpg = \", intercept, \" + \", slope, \"*wt\")\n\n# The plot\nmtcars %&gt;% \n  ggplot(aes(x = wt, y = mpg)) +\n  geom_point(color = \"black\") +\n  geom_smooth(method = \"lm\", color = \"red\") + \n  labs(x = \"Weight (1000 lbs)\",\n       y = \"Miles per Gallon\",\n       title = \"MPG by Weight\") +\n  annotate(\"text\", x = max(mtcars$wt) * 0.6, y = max(mtcars$mpg) * 0.9,\n           label = equation, hjust = 0, color = \"black\", size = 4) +\n  theme_bw()\n\nVed å kjøre denne koden vil du få denne spredningsplotten.\n\nTolkning\nHvert enkelt punkt i spredningsplottet representerer en bil fra ´mtcars´datasettet. X-aksen viser bilens vekt mens Y-aksen viser bilens drivstoffeffektivitet.\nDen røde linjen er et resultat av en lineær regresjonsanalyse. Denne linjen representerer det best passende forholdet mellom bilens vekt og dens drivstoffeffektivitet.\nKonstantleddet er 37.29. Den representerer gjennomsnittsverdien av ´mpg´(Miles per Gallon) når ´wt´ (Weight) er lik null. Dette er et teoretisk punkt for i den ekte verden så kan ikke en bil ha null vekt. Likevel så er det viktig for å si noe om den lineære sammenhengen.\nHelningskoffisienten er -5.34. Denne verdien sier noe om hvor mye ´mpg´ (Miles per Gallon) er forventet å endre seg i forhold til en enhetsøkning i bilens vekt. En negativ helning som i dette tilfellet, indikerer at dersom vekten økes så vil drivstoffeffektiviteten minke.\nVår lineære regresjonslinje har en negativ helning som indikrerer en negativ korrelasjon mellom bilens vekt og dens drivstoffeffektivitet. Det betyr at tyngre biler har en tendens til å være mindre drivstoffeffektive.\nJo nærmere datapunktene er til den lineære regresjonslinjen jo sterkere er forholdet mellom drivstoffeffektivitet og vekt. Dersom punktene er mer spredt rundt linjen så antyder det at det er andre faktorer som også har innflytelse på bilens drivstoffeffektivitet.\n\n\nLinear regression - predictive model\nWritten by Knut Solvig\nDenne delen av innlegget skulle egentlig være på norsk, men jeg (Knut) begynte bare å skrive engelsk… beklager ;) Dersom du sliter med å forstå på engelsk kan jeg anbefale nettsiden deepl.com for å oversette. Eventuelt kan du sende oss en e-post på codinghjornet@gmail.com\n\nWhen dealing with quantitative methods, it can be very relevant to look at predictive models. These models help to “predict” a value based on a coefficient (as obtained through a linear model). The formula for a predictive model is not very complicated:\n\\(\\hat{y} = ax + b\\)\nWhere \\(a\\) is the slope of the regression (coefficient of independent variable). In turn, \\(x\\) is the assumed value of the predictor value. Lastly, \\(b\\) is the intercept for y (dependent variable).\nTo simplify and understand how this formula works, consider the following minimal example:\n\nlibrary(tidyverse)\nweight &lt;- c(50, 60, 70, 80, 90, 50, 60, 75)\nheight &lt;- c(160, 165, 170, 175, 180, 165, 168, 175)\n\nHere we assign a few values to the new variables weight and height. These values are artificial, only used for this example.\n\ndf &lt;- data.frame(height, weight)\n\nmodel1 &lt;- lm(height ~ weight, data = df)\n\nNext, we assign these variables into a data frame (making it into a dataset). And run the R function lm()and assigning that to model1 to get the regression model for our dependent variable (height) and the independent variable (weight)\n\nsummary(model1)\n\n\nCall:\nlm(formula = height ~ weight, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-2.3002 -1.2759 -0.2516  1.3796  2.6998 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 140.22678    3.39563  41.296 1.35e-08 ***\nweight        0.44147    0.04978   8.869 0.000114 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.893 on 6 degrees of freedom\nMultiple R-squared:  0.9291,    Adjusted R-squared:  0.9173 \nF-statistic: 78.65 on 1 and 6 DF,  p-value: 0.0001144\n\n\nNow we summarize model1. Here we will get the information we need.\nNow, we have everything we need. For this part, you do not need to use R. Get out a calculator.\nRecall that the formula goes like this: \\(\\hat{y} = ax + b\\). Our \\(a\\) in this example is \\(0.44147\\) because that is the coefficient for weight.\nOur formula now then looks like this: \\(\\hat{y} = 0.44147x + b\\)\nNext, we plot in the value of \\(b\\): The Y intercept. In this case, it is \\(140.22678\\). This means, that if your weight is 0 (quite unrealistic), your height would be 140 according to this model. Our formula now looks different: \\(\\hat{y} = 0.44147x + 140.22678\\)\n\nNow, we are ready to predict.\nCurrently, our formula is not giving any results, because we haven’t input a value yet.\nLet’s say we would like to check how tall a person that weighs 68kg would be. We then have to type this into a calculator: \\(0.44147*(68)+140.22678\\). This gives us the result: \\(170.24674\\) or \\(170\\) centimeters if we round down. This model can then be used for any values we wish.\n\nAny more questions after reading this blog post? Feel free to e-mail us at codinghjornet@gmail.com. We answer e-emails whenever we can, during our work hours."
+  },
+  {
+    "objectID": "posts/Case selection blog post/index.html",
+    "href": "posts/Case selection blog post/index.html",
+    "title": "Case selection 101",
+    "section": "",
+    "text": "Welcome to this blog post about the wonders of case selection in quantitative methods!"
+  },
+  {
+    "objectID": "posts/Case selection blog post/index.html#micro-cases",
+    "href": "posts/Case selection blog post/index.html#micro-cases",
+    "title": "Case selection 101",
+    "section": "Micro cases",
+    "text": "Micro cases\nMicro cases looks at individual cases. For example, the European Social Survey dataset (ESS) is a typical micro case dataset. Here you will find observations from individuals and their answers on different questions."
+  },
+  {
+    "objectID": "posts/Case selection blog post/index.html#macro-cases",
+    "href": "posts/Case selection blog post/index.html#macro-cases",
+    "title": "Case selection 101",
+    "section": "Macro cases",
+    "text": "Macro cases\nFurther, you can also choose a macro case, which is to look at a research question from a national or international perspective. Here you for example compare the democratic value of a country with another country.\nOne important thing to note when selecting your case is that you need to be able to justify why your case is the best for answering your research question. For example, do not choose to look at Norway as a case and justify it with “I live in Norway, therefore I want to look at Norway”. This is not a methodologically correct way of doing it. Instead, you can say that “previous research has looked at this phenomena through the lens of American countries, but by using Theory X it should also be the case in an European country like Norway.”\nPhoto by CHUTTERSNAP on Unsplash"
+  },
+  {
+    "objectID": "posts/Vanlige problemer i R/index.html",
+    "href": "posts/Vanlige problemer i R/index.html",
+    "title": "Vanlige problemer i R",
+    "section": "",
+    "text": "Her er svar på noen vanlige problemer i R.\nProblem\nJeg har lastet ned ESS-datasettet fra dataportalen og har prøvd å åpne det ved å dobbeltklikke på filen, men dataen min sier «det finnes ikke programvare til å åpne filen». Deretter prøvde jeg å åpne det i RStudio, men fikk en error som sa at «filen er for stor». Hva skal jeg gjøre annerledes?\nLøsning\nImportering av et datasett til R/RStudio er ikke helt det samme som å åpne et Word-dokument, hvor det å dobbeltklikke vil fungere.\nDenne prosessen er forklart i Tutorial 2 (chapter 4). For å importere et datasett må man gjøre følgende:\n\n# This imports the dataset and saves it as \"ess\"\ness &lt;- haven::read_dta(\"nameofyourdatasetfile.dta\")\n\n\n# This then converts the dataset to an easier-to-use format\ness &lt;- labelled::unlabelled(ess)\n\nI tillegg må man også forsikre seg om a) at det rette prosjektet (Project) er aktivt i RStudio; b) at datasett-filen man ønsker å importere er i prosjektmappa (Project folder); og c) at man har de nødvendige pakkene installert (dersom nødvendig, skriver man disse kommandoene i konsollen (Console):\n\n# Først\ninstall.packages(\"haven\")\n# Deretter\ninstall.packages(\"labelled\")\n\nProblem\nPotensielt problem som kan forekomme ved “transformering” av datasettfilen med labelled::unlabelled() \nEtter å ha importert datasettfilen til Rstudio med haven-pakken, så burde man alltid “transformere” datasettfilen med labelled::unlabelled() (Tutorial 2).\nDa kan følgende “error” forekomme:\nError in `validate_labelled()`: \n! `labels` must be unique\nDette skyldes sannsynligvis datasettfilen som er gitt på hjemmesiden til ESS.\nLøsning\nMan kan forsøke å laste ned filen i et annet format fra hjemmesiden til ESS. Hvis man for eksempel laster ned datasettet som en Stata-fil (.dta) og man får erroren etter man har importert filen med read_dta(), kan man i stedet forsøke å laste ned datasettet som SPSS-fil (.sav) og importere det med  read_sav().\nFoto av Tim Gouw på Unsplash."
+  },
+  {
+    "objectID": "posts/SSB import/index.html",
+    "href": "posts/SSB import/index.html",
+    "title": "Hvordan importere data fra SSB",
+    "section": "",
+    "text": "Statistisk sentralbyrå (SSB) driver med innsamling og analyse av data om mange ulike norske parametere."
+  },
+  {
+    "objectID": "posts/SSB import/index.html#steg-1-installere-og-laste-inn-pxwebapidata",
+    "href": "posts/SSB import/index.html#steg-1-installere-og-laste-inn-pxwebapidata",
+    "title": "Hvordan importere data fra SSB",
+    "section": "Steg 1: Installere og laste inn PxWebApiData",
+    "text": "Steg 1: Installere og laste inn PxWebApiData\nFølgende kode vil installere og laste inn pakken som trengs videre. Jeg laster også inn tidyverse da denne er nyttig for senere når vi skal visualisere funnene fra SSB:\n\nif (!require(\"PxWebApiData\")) install.packages(\"PxWebApiData\") # Install package PxWebApiData if not found.\n\nLoading required package: PxWebApiData\n\nlibrary(PxWebApiData) # Load PxWebApiData package\nlibrary(tidyverse) # Load tidyverse package\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.3     ✔ readr     2.1.4\n✔ forcats   1.0.0     ✔ stringr   1.5.0\n✔ ggplot2   3.4.4     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.0\n✔ purrr     1.0.2     \n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors"
+  },
+  {
+    "objectID": "posts/SSB import/index.html#steg-2-finn-data",
+    "href": "posts/SSB import/index.html#steg-2-finn-data",
+    "title": "Hvordan importere data fra SSB",
+    "section": "Steg 2: Finn data",
+    "text": "Steg 2: Finn data\nNår du er inne i SSB kan du lete etter en tabell som du ønsker å bruke for å gjøre dine analyser. Se for eksempel på denne tabellen: SSB - Stortingsvalget listekandidater. Dersom du scroller ned litt vil du se at denne tabellen har en kilde, det tallet tar du vare på. Se bilde nedenfor:\n\n\n\nKildenummer til en tabell"
+  },
+  {
+    "objectID": "posts/SSB import/index.html#steg-3-importer-tabellen",
+    "href": "posts/SSB import/index.html#steg-3-importer-tabellen",
+    "title": "Hvordan importere data fra SSB",
+    "section": "Steg 3: Importer tabellen",
+    "text": "Steg 3: Importer tabellen\nNå som du har det tallet på tabellen du ønsker å analysere, må vi få dette inn i R . For å få dette til må du skrive følgende kode, der du bytter ut \"09443\" med navnet på din kode.\n\nvariables &lt;- ApiData(\"https://data.ssb.no/api/v0/no/table/09443\",\n                     returnMetaFrames = TRUE)\n\nHer tar vi og lager en liste heter “variables” ved å bruke funksjonen ApiData fra PwWebApiData pakken.\nDeretter lager vi en til liste som heter “values”…\n\nvalues &lt;- ApiData(\"https://data.ssb.no/api/v0/no/table/09443\",\n                     returnMetaFrames = TRUE)\n\nNå kan vi indeksere listen vår “values” for å se gjennom underlistene. Med eksempelet mitt med tabell 09443 kan vi gjøre slik:\n\nvalues[[1]]$values # Region - Indeks 1\n\n [1] \"0\"   \"v01\" \"v02\" \"v03\" \"v04\" \"v05\" \"v06\" \"v07\" \"v08\" \"v09\" \"v10\" \"v11\"\n[13] \"v12\" \"v14\" \"v15\" \"v16\" \"v17\" \"v18\" \"v19\" \"v20\"\n\nvalues[[2]]$values # Politisk parti - Indeks 2\n\n [1] \"00\" \"01\" \"02\" \"03\" \"04\" \"08\" \"55\" \"05\" \"06\" \"07\" \"11\" \"92\"\n\nvalues[[3]]$values # Kjønn - Indeks 3\n\n[1] \"1\" \"2\"\n\nvalues[[4]]$values # Kandidater - Indeks 4\n\n[1] \"Kandidater\"\n\nvalues[[5]]$values # Tid - Indeks 5\n\n[1] \"2005\" \"2009\" \"2013\" \"2017\" \"2021\"\n\n\nDa vil man få opp alle kategoriene som man kan filtrere på senere, for eksempel ved å indeksere kjønn listen ser vi at det er to muligheter: “1” og “2”. Altså, kjønn 1 og kjønn 2. Vi må nå skjønne hva disse egentlig betyr, du kan da skrive:\n\nvalues[[3]] # Denne koden vil vise både verdi og \"valueTexts\" som er forklaringen på hva variabelen betyr.\n\n  values valueTexts\n1      1       Menn\n2      2    Kvinner\n\n\nGratulerer! Du har nå klart og importere data fra SSB! Fungerte ikke dette? Da kan du sjekke opp i dokumentasjonen i CRAN her."
+  },
+  {
+    "objectID": "posts/SSB import/index.html#steg-4-datavask",
+    "href": "posts/SSB import/index.html#steg-4-datavask",
+    "title": "Hvordan importere data fra SSB",
+    "section": "Steg 4: Datavask",
+    "text": "Steg 4: Datavask\nNext up, datavask. Som du ser i koden er ikke koden direkte leselig enda, vi ønsker å gjøre tabellen om til et dataset. Nedenfor ser du en måte å gjøre dette, da også med filtrering av variabler:\n\nmy_data &lt;- ApiData(\"https://data.ssb.no/api/v0/no/table/09443\",\n                Tid = c(\"2005\", \"2021\"), # Velger 2005 og 2021 som årstall.\n                Region = \"0\", # Velger alle regioner\n                PolitParti = c(\"Alle partier\"), # Velger alle partier\n                Kjonn = c(\"1\", \"2\") # Velger alle kjønn.\n                )\n\nmy_data &lt;- my_data[[1]]\n\nDen siste linjen i koden forteller R at vi ønsker å bare ha med indeks 1 (verdiene som “1” og “2” fra kjønn). Dermed forsvinner valueTexts og du vil se i Enviornment at tabellen går fra en liste (list of 2) til en data frame ( 4 obs. of 6 variables). Dermed er vi klare til å analysere datasettet vårt."
+  },
+  {
+    "objectID": "posts/SSB import/index.html#steg-5-analysere-og-visualisering",
+    "href": "posts/SSB import/index.html#steg-5-analysere-og-visualisering",
+    "title": "Hvordan importere data fra SSB",
+    "section": "Steg 5: Analysere og visualisering",
+    "text": "Steg 5: Analysere og visualisering\nDersom man ønsker å få en liten oversikt over datasettet kan man gjøre slik som normalt, for å se de første observasjonene kan vi gjøre:\n\nhead(my_data) # Vi får her fire observasjoner, fordi det er alle observasjonene vårt dataset har.\n\n       region politisk parti   kjønn statistikkvariabel fireårlig value\n1 Hele landet   Alle partier    Menn    Listekandidater      2005  2313\n2 Hele landet   Alle partier    Menn    Listekandidater      2021  3116\n3 Hele landet   Alle partier Kvinner    Listekandidater      2005  1501\n4 Hele landet   Alle partier Kvinner    Listekandidater      2021  2058\n\n\nMan kan i tillegg bruke funksjonen comment() fra PxWebApiData pakken for å se label av tabellen vi hentet ut. Dette er nyttig for å kunne huske hva tabellen egentlig handlet om, samtidig får man se kilden (SSB) og når den sist var oppdatert. I eksempelet er den sist oppdatert 2021-06-28T06:00:00Z , altså, 28. juni 2021 kl. 06:00.\nTil slutt, så skal vi visualisere tabellen vi har hentet ut fra SSB. Dette gjøres likt som du er vant med fra ESS, CPDS eller lignende datasett. Her er et eksempel på et stolpediagram som ser på forskjellen mellom listekandidater i 2005 og 2021 fordelt på kjønn:\n\nmy_data %&gt;% \n  ggplot(aes(x = fireårlig,\n             y = value,\n             fill = kjønn)) +\n  labs(title = \"Distribution of women and men as list candidates in political parties in Norway\n       In 2005 and 2021.\",\n       x = \"Year\",\n       y = \"Candidates in political parties\",\n       fill = \"Gender\",\n       caption = \"List candidates to Parlamentary elections in Norway by gender.\n       Source: Statistisk Sentralbyrå\n       Last updated: 28/06/2021\") +\n  theme_bw() +\n  geom_bar(stat = \"identity\",\n           position = \"dodge\") +\n  scale_fill_grey()"
+  },
+  {
+    "objectID": "posts/Post of Bell Curve/index.html",
+    "href": "posts/Post of Bell Curve/index.html",
+    "title": "The different types of distributions",
+    "section": "",
+    "text": "In this blog post I wish to use some time to talk about the normal distribution or the bell curve.\nThe normal distribution is the ideal distribution of data as it is very easy to intepret, but even though it is called a normal distribution - it rarely occurs in scientific analyses.\nBelow you can see what a bell curve looks like in a simplified format in Figure 1:\nX &lt;- seq(from=-3, to=3, length.out=1000)\n\nf.x &lt;- dnorm(X, mean = 0, sd = 1)\n\nplot(X, f.x, type = 'l', col = \"red\", lwd=3)\n\n\n\n\nFigure 1: A traditional bell curve.\nThe great thing about a bell curve is that you can use the 68-95-99 rule on it (like mentioned in Kellstedt & Whitten page. 150). This rule is basically the amount of data that are within the standard deviations of the mean in the graph. See the example below:\nA way to understand how the bell curve works is to imagine that you roll a dice 1000 times. You are more likely to get a 3 or a 4 than you are to get 6 or 1, in that way everytime you plot into your dataset a dice throw you are creating a graph which should be relatively evenly distributed - like a bell curve."
+  },
+  {
+    "objectID": "posts/Post of Bell Curve/index.html#left-skewed-distribution",
+    "href": "posts/Post of Bell Curve/index.html#left-skewed-distribution",
+    "title": "The different types of distributions",
+    "section": "Left-skewed distribution",
+    "text": "Left-skewed distribution\nThe first one, a left-skewed distribution is when most of your data points are to the right (I know that sounds wrong, that left-skewed has data points to the right... But it is. Imagine that there are someone (to the left) pushing your data to to the right.) of the distribution. For example, if respondents had to choose on a scale from 1 to 10 how happy they felt at the very moment, we might end up with a left-skewed distribution where most of the data points are to the right of the scale. See an exaggerated illustration of this below:"
+  },
+  {
+    "objectID": "posts/Post of Bell Curve/index.html#right-skewed-distribution",
+    "href": "posts/Post of Bell Curve/index.html#right-skewed-distribution",
+    "title": "The different types of distributions",
+    "section": "Right-skewed distribution",
+    "text": "Right-skewed distribution\nA right-skewed distribution is basically the same theory as a left-skewed one. Here the data points are more to the left than the middle. An example of this is below:"
+  },
+  {
+    "objectID": "posts/Post of Bell Curve/index.html#kurtosis",
+    "href": "posts/Post of Bell Curve/index.html#kurtosis",
+    "title": "The different types of distributions",
+    "section": "Kurtosis",
+    "text": "Kurtosis\nKurtosis looks at the top of the distribution. Wether or not the distribution is more level or very “pointy”. This is to get an idea of how many resides on the mean of the data points.\nA negative kurtosis means that the distribution is flat. A positive means it’s peaking. A good rule for kurtosis is that it should not be less than -2 and not more than +2."
+  },
+  {
+    "objectID": "posts/Post of Bell Curve/index.html#why-is-all-this-important",
+    "href": "posts/Post of Bell Curve/index.html#why-is-all-this-important",
+    "title": "The different types of distributions",
+    "section": "Why is all this important?",
+    "text": "Why is all this important?\nSkewness and kurtosis are both important. Though, skewness is more looked at than kurtosis and your focus should therefore reside on this. However, knowing what kurtosis means and is, is useful.\nA skewed distribution can affect the way that we do inferences of our data. That is why we need to know about skewness. For example, if you’re doing analysis of a variable and find that it has a right-skewed distribution, it might not be ideal to use for inferences in the same way as a bell-curve/normal distribution. Some statistical models might also not work well if this is the case.\nThank you for reading, I hope you are now a little bit smarter around the topic of the normal distribution - also called a bell curve."
+  },
+  {
+    "objectID": "posts/Bok_anbefalinger/index.html",
+    "href": "posts/Bok_anbefalinger/index.html",
+    "title": "Litteratur anbefalinger for R",
+    "section": "",
+    "text": "Programmering kan være vanskelig å sette seg inn i. Det trengs en del logisk tenkning for å forstå hvordan et programmeringsspråk er satt sammen. Heldigvis, er R et programmeringsspråk som går under “high level programming language”, som vil si at språket er mer menneske vennlig enn datamaskin vennlig. Om språket hadde vært lavest mulig “low level code” ville det vært koding med bare 1’ere og 0’ere, altså binær kode… da hadde de aller flest slitt med å få noe gjort.\nDa vi skjønner at R kan være kompleks og til tider frustrerende å forstå, har vi noen forslag til bøker som kan være nyttige for nybegynnere, men også andre. Noen er norske, men også noen engelske. Disse bøkene fungerer som et supplement til pensum i BST290 - Kvantitativ forskningsmetode, da boken til Kellstedt & Whitten er veldig god for å forstå teorien bak kvantitativ metode, men ikke nødvendigvis for å lære seg R og logikken bak programmeringsspråk."
+  },
+  {
+    "objectID": "posts/Bok_anbefalinger/index.html#lær-deg-r",
+    "href": "posts/Bok_anbefalinger/index.html#lær-deg-r",
+    "title": "Litteratur anbefalinger for R",
+    "section": "Lær Deg R",
+    "text": "Lær Deg R\n“Lær Deg R”, skrevet av Silje Synnøve Lyder Hermansen er en fin bok på norsk for å forstå grunnleggende R. Med denne boken vil du kunne få en del praktisk erfaring med å bruke R, samt at det følger med et datasett og eksempel oppgaver man kan jobbe med underveis. Boken finnes kun i fysisk format.\nKjøp boken her.\n\n\n\nLær deg R cover"
+  },
+  {
+    "objectID": "posts/Bok_anbefalinger/index.html#the-book-of-r",
+    "href": "posts/Bok_anbefalinger/index.html#the-book-of-r",
+    "title": "Litteratur anbefalinger for R",
+    "section": "The Book of R",
+    "text": "The Book of R\n“The Book of R” skrevet av Tilman M. Davies er en mer teknisk bok, men går også mer detaljert inn i R sine funksjoner. Boken er på engelsk og ligger ute gratis på nett.\nLast ned boken her.\n\n\n\nThe Book of R cover"
+  },
+  {
+    "objectID": "posts/Bok_anbefalinger/index.html#hands-on-programming-with-r",
+    "href": "posts/Bok_anbefalinger/index.html#hands-on-programming-with-r",
+    "title": "Litteratur anbefalinger for R",
+    "section": "Hands-on programming with R",
+    "text": "Hands-on programming with R\n“Hands-on programming with R” skrevet av Garrett Grolemund er en grei nybegynnervennlig bok som ligger gratis tilgjengelig på nett. Den er også på engelsk.\nLast ned boken her.\n\n\n\nHands-on programming with R cover"
+  },
+  {
+    "objectID": "posts/Bok_anbefalinger/index.html#r-for-political-data-science",
+    "href": "posts/Bok_anbefalinger/index.html#r-for-political-data-science",
+    "title": "Litteratur anbefalinger for R",
+    "section": "R for Political Data Science",
+    "text": "R for Political Data Science\n“R for Political Data Science” skrevet av Francisco Urdinez og Andres Cruz er en bok for dem som studerer statsvitenskap og ønsker en ekstra innføring i hvordan R og statistikk passer sammen i en statsvitenskapelig verden. Boken er på engelsk og bruker pakker som *tidyverse* for å gi en god forståelse. Boken er tilgjengelig via Universitetsbiblioteket på UiS.\nKjøp boken her\nFinn boken på biblioteket her (Ebok)\n\n\n\nR for Political Data Science cover"
+  },
+  {
+    "objectID": "posts/Bok_anbefalinger/index.html#r-for-data-science",
+    "href": "posts/Bok_anbefalinger/index.html#r-for-data-science",
+    "title": "Litteratur anbefalinger for R",
+    "section": "R for Data Science",
+    "text": "R for Data Science\n“R for Data Science” skrevet av Garrett Grolemund og Hadley Wickham er en bok som er mer rettet mot ingeniører enn samfunnsvitere, men det er absolutt en god egenskap og kunne tilegne seg kunnskap som er mer teknisk innrettet. Boken ligger gratis på nett, så man taper ingenting på å gi boken et forsøk. Boken er engelsk, bruker også *tidyverse* samtidig som den har oppgaver det er mulig og gjøre mens du leser for å forstå konseptene bedre og i mer detalj.\nLast ned boken her.\n\n\n\nR for Data Science cover"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Kodehjørnet ved UiS",
+    "section": "",
+    "text": "Litteratur anbefalinger for R\n\n\n\n\n\n\n\nnorwegian\n\n\nliterature\n\n\nbooks\n\n\nR\n\n\nprogramming\n\n\nadvice\n\n\nquantitative\n\n\n\n\n\n\n\n\n\n\n\nFeb 6, 2024\n\n\nKnut Solvig\n\n\n\n\n\n\n  \n\n\n\n\nThe different types of distributions\n\n\n\n\n\n\n\nhow-to\n\n\ncode\n\n\ncase\n\n\nselection\n\n\nquantitative\n\n\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nKnut Solvig\n\n\n\n\n\n\n  \n\n\n\n\nLineær funksjon og prediktive modeller\n\n\n\n\n\n\n\nhow-to\n\n\ncode\n\n\nlinear function\n\n\nregression\n\n\nprediction\n\n\nquantitative\n\n\nNorwegian\n\n\nEnglish\n\n\n\n\n\n\n\n\n\n\n\nDec 9, 2023\n\n\nPetter Knardahl & Knut Solvig\n\n\n\n\n\n\n  \n\n\n\n\nVanlige problemer i R\n\n\n\n\n\n\n\nhow-to\n\n\nnorwegian\n\n\nproblem\n\n\n\n\n\n\n\n\n\n\n\nNov 14, 2023\n\n\nKaroline Rugaard\n\n\n\n\n\n\n  \n\n\n\n\nProblemer med Norske bokstaver i R? (ÆØÅ)\n\n\n\n\n\n\n\nhow-to\n\n\nnorwegian\n\n\nbug\n\n\n\n\n\n\n\n\n\n\n\nNov 13, 2023\n\n\nPetter Knardahl\n\n\n\n\n\n\n  \n\n\n\n\nHvordan importere data fra SSB\n\n\n\n\n\n\n\nhow-to\n\n\ncode\n\n\nSSB\n\n\nstatistisk sentralbyrå\n\n\nquantitative\n\n\nNorwegian\n\n\n\n\n\n\n\n\n\n\n\nNov 7, 2023\n\n\nKnut Solvig\n\n\n\n\n\n\n  \n\n\n\n\nWelcome to the Coding Corner!\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nSep 26, 2023\n\n\nKnut Solvig and Petter Knardahl\n\n\n\n\n\n\n  \n\n\n\n\nCase selection 101\n\n\n\n\n\n\n\nhow-to\n\n\ncode\n\n\ncase\n\n\nselection\n\n\nquantitative\n\n\n\n\n\n\n\n\n\n\n\nSep 5, 2023\n\n\nKnut Solvig\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About us",
+    "section": "",
+    "text": "This blog is curated by a group of students working with the Coding corner project at the University of Stavanger, Norway. We give students and employees tips on quantitative and statistical methods.\nWe offer drop-in support every Tuesday from 10:15-12:00 at EOJ 376 (Meeting room at the departement of media- and social sciences).\nThe blog is currently being run by: Petter Knardahl and Knut Solvig."
+  }
+]
