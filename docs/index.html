@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,14 +34,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8610558a007458a9b978551a034f4d85.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5348f60334dd04cbc36623d8010fff4a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -113,7 +114,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -139,6 +140,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">KODEHJØRNET // THE CODING CORNER</span>
     </a>
@@ -187,7 +190,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="YWR2aWNl">advice <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YW5hbHlzaXM=">analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ym9va3M=">books <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YnVn">bug <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FzZQ==">case <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y29kZQ==">code <span class="quarto-category-count">(5)</span></div><div class="category" data-category="RW5nbGlzaA==">English <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aG93LXRv">how-to <span class="quarto-category-count">(6)</span></div><div class="category" data-category="bGluZWFyJTIwZnVuY3Rpb24=">linear function <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bGl0ZXJhdHVyZQ==">literature <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm9yd2VnaWFu">norwegian <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Tm9yd2VnaWFu">Norwegian <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cHJlZGljdGlvbg==">prediction <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvYmxlbQ==">problem <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvZ3JhbW1pbmc=">programming <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhbnRpdGF0aXZl">quantitative <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVncmVzc2lvbg==">regression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2VsZWN0aW9u">selection <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U1NC">SSB <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGlzayUyMHNlbnRyYWxieXIlQzMlQTU=">statistisk sentralbyrå <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(11)</span></div><div class="category" data-category="YWR2aWNl">advice <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YW5hbHlzaXM=">analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ym9va3M=">books <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YnVn">bug <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FzZQ==">case <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y29kZQ==">code <span class="quarto-category-count">(6)</span></div><div class="category" data-category="RW5nbGlzaA==">English <span class="quarto-category-count">(2)</span></div><div class="category" data-category="aG93LXRv">how-to <span class="quarto-category-count">(7)</span></div><div class="category" data-category="bGluZWFyJTIwZnVuY3Rpb24=">linear function <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bGl0ZXJhdHVyZQ==">literature <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bm9yd2VnaWFu">norwegian <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Tm9yd2VnaWFu">Norwegian <span class="quarto-category-count">(2)</span></div><div class="category" data-category="T0VDRA==">OECD <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJlZGljdGlvbg==">prediction <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvYmxlbQ==">problem <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvZ3JhbW1pbmc=">programming <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhbnRpdGF0aXZl">quantitative <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVncmVzc2lvbg==">regression <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2VsZWN0aW9u">selection <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U1NC">SSB <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGlzayUyMHNlbnRyYWxieXIlQzMlQTU=">statistisk sentralbyrå <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -203,29 +206,45 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1759390450123" data-listing-reading-time-sort="4" data-listing-word-count-sort="701">
-<div class="thumbnail"><a href="./posts/geom_count/index.html" class="no-external">
+<div class="quarto-post image-right" data-index="0" data-categories="aG93LXRvJTJDY29kZSUyQ09FQ0QlMkNxdWFudGl0YXRpdmUlMkNFbmdsaXNo" data-listing-date-sort="1772578800000" data-listing-file-modified-sort="1772703280210" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1584">
+<div class="thumbnail"><a href="./posts/OECD_data/index.html" class="no-external">
 
-<p class="card-img-top"><img src="posts/geom_count/index_files/figure-html/unnamed-chunk-4-1.png"  class="thumbnail-image card-img"/></p>
+<img loading="lazy" src="./posts/OECD_data/OECD_main.png" class="thumbnail-image">
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/geom_count/index.html" class="no-external">Visualizing overlapping points with geom_count()</a>
+<a href="./posts/OECD_data/index.html" class="no-external">How to import data from the OECD</a>
 </h3>
-<div class="delink listing-description"><a href="./posts/geom_count/index.html" class="no-external">
-The default way to visualize the relationship between two numeric variables is a scatterplot, which can be drawn with the <code>geom_point()</code> function in <code>ggplot2</code>. Often, however…<em></em><em></em>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('aG93LXRv'); return false;">how-to</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Y29kZQ=='); return false;">code</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('T0VDRA=='); return false;">OECD</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('cXVhbnRpdGF0aXZl'); return false;">quantitative</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RW5nbGlzaA=='); return false;">English</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/OECD_data/index.html" class="no-external">
+The Organisation for Economic Co-operation and Development (OECD) is an international organisation that provides data and research aimed at finding solutions to social…<sup></sup>
 </a></div>
 </div>
 <div class="metadata">
-<a href="./posts/geom_count/index.html" class="no-external">
+<a href="./posts/OECD_data/index.html" class="no-external">
+<div class="listing-date">
+Mar 4, 2026
+</div>
 <div class="listing-author">
-Rosa Ottestad, Norman Sunde
+Marie Langeland
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1763039756660" data-listing-reading-time-sort="4" data-listing-word-count-sort="734">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1762988400000" data-listing-file-modified-sort="1772703266549" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="733">
 <div class="thumbnail"><a href="./posts/ai_coding/index.html" class="no-external">
 
 <p class="card-img-top"><img src="posts/ai_coding/pe_fig1.png"  class="thumbnail-image card-img"/></p>
@@ -241,13 +260,41 @@ AI-verktøy som <em>ChatGPT</em> kan være svært nyttige hjelpemidler for stude
 </div>
 <div class="metadata">
 <a href="./posts/ai_coding/index.html" class="no-external">
+<div class="listing-date">
+Nov 13, 2025
+</div>
 <div class="listing-author">
 Kristine Vanebo-Bøe
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="bm9yd2VnaWFuJTJDbGl0ZXJhdHVyZSUyQ2Jvb2tzJTJDUiUyQ3Byb2dyYW1taW5nJTJDYWR2aWNlJTJDcXVhbnRpdGF0aXZl" data-listing-date-sort="1707174000000" data-listing-file-modified-sort="1730214506330" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="466">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1759269600000" data-listing-file-modified-sort="1772703401788" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="703">
+<div class="thumbnail"><a href="./posts/geom_count/index.html" class="no-external">
+
+<p class="card-img-top"><img src="posts/geom_count/index_files/figure-html/unnamed-chunk-4-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/geom_count/index.html" class="no-external">Visualizing overlapping points with geom_count()</a>
+</h3>
+<div class="delink listing-description"><a href="./posts/geom_count/index.html" class="no-external">
+The default way to visualize the relationship between two numeric variables is a scatterplot, which can be drawn with the <code>geom_point()</code> function in <code>ggplot2</code>. Often, however…<em></em><em></em>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/geom_count/index.html" class="no-external">
+<div class="listing-date">
+Oct 1, 2025
+</div>
+<div class="listing-author">
+Rosa Ottestad, Norman Sunde
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="bm9yd2VnaWFuJTJDbGl0ZXJhdHVyZSUyQ2Jvb2tzJTJDUiUyQ3Byb2dyYW1taW5nJTJDYWR2aWNlJTJDcXVhbnRpdGF0aXZl" data-listing-date-sort="1707174000000" data-listing-file-modified-sort="1730214506330" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="466">
 <div class="thumbnail"><a href="./posts/Bok_anbefalinger/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/Bok_anbefalinger/data_sciencecover.png" class="thumbnail-image">
@@ -289,7 +336,7 @@ Knut Solvig
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="aG93LXRvJTJDY29kZSUyQ2Nhc2UlMkNzZWxlY3Rpb24lMkNxdWFudGl0YXRpdmU=" data-listing-date-sort="1705964400000" data-listing-file-modified-sort="1711525989594" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="671">
+<div class="quarto-post image-right" data-index="4" data-categories="aG93LXRvJTJDY29kZSUyQ2Nhc2UlMkNzZWxlY3Rpb24lMkNxdWFudGl0YXRpdmU=" data-listing-date-sort="1705964400000" data-listing-file-modified-sort="1711525989594" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="671">
 <div class="thumbnail"><a href="./posts/Post of Bell Curve/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/Post of Bell Curve/titleimage.png" class="thumbnail-image">
@@ -327,7 +374,7 @@ Knut Solvig
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="aG93LXRvJTJDY29kZSUyQ2xpbmVhciUyMGZ1bmN0aW9uJTJDcmVncmVzc2lvbiUyQ3ByZWRpY3Rpb24lMkNxdWFudGl0YXRpdmUlMkNOb3J3ZWdpYW4lMkNFbmdsaXNo" data-listing-date-sort="1702076400000" data-listing-file-modified-sort="1711525989558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1228">
+<div class="quarto-post image-right" data-index="5" data-categories="aG93LXRvJTJDY29kZSUyQ2xpbmVhciUyMGZ1bmN0aW9uJTJDcmVncmVzc2lvbiUyQ3ByZWRpY3Rpb24lMkNxdWFudGl0YXRpdmUlMkNOb3J3ZWdpYW4lMkNFbmdsaXNo" data-listing-date-sort="1702076400000" data-listing-file-modified-sort="1711525989558" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1228">
 <div class="thumbnail"><a href="./posts/Linaer funksjon/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/Linaer funksjon/mtcars.png" class="thumbnail-image">
@@ -371,7 +418,7 @@ Petter Knardahl &amp; Knut Solvig
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="aG93LXRvJTJDbm9yd2VnaWFuJTJDcHJvYmxlbQ==" data-listing-date-sort="1699916400000" data-listing-file-modified-sort="1711525989617" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="272">
+<div class="quarto-post image-right" data-index="6" data-categories="aG93LXRvJTJDbm9yd2VnaWFuJTJDcHJvYmxlbQ==" data-listing-date-sort="1699916400000" data-listing-file-modified-sort="1711525989617" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="272">
 <div class="thumbnail"><a href="./posts/Vanlige problemer i R/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/Vanlige problemer i R/Tim_Gouw.jpg" class="thumbnail-image">
@@ -405,7 +452,7 @@ Karoline Rugaard
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="aG93LXRvJTJDbm9yd2VnaWFuJTJDYnVn" data-listing-date-sort="1699830000000" data-listing-file-modified-sort="1711525989580" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="251">
+<div class="quarto-post image-right" data-index="7" data-categories="aG93LXRvJTJDbm9yd2VnaWFuJTJDYnVn" data-listing-date-sort="1699830000000" data-listing-file-modified-sort="1711525989580" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="251">
 <div class="thumbnail"><a href="./posts/Norske bokstaver i R/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/Norske bokstaver i R/bugmac.jpg" class="thumbnail-image">
@@ -439,7 +486,7 @@ Petter Knardahl
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="aG93LXRvJTJDY29kZSUyQ1NTQiUyQ3N0YXRpc3Rpc2slMjBzZW50cmFsYnlyJUMzJUE1JTJDcXVhbnRpdGF0aXZlJTJDTm9yd2VnaWFu" data-listing-date-sort="1699311600000" data-listing-file-modified-sort="1711525989611" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1338">
+<div class="quarto-post image-right" data-index="8" data-categories="aG93LXRvJTJDY29kZSUyQ1NTQiUyQ3N0YXRpc3Rpc2slMjBzZW50cmFsYnlyJUMzJUE1JTJDcXVhbnRpdGF0aXZlJTJDTm9yd2VnaWFu" data-listing-date-sort="1699311600000" data-listing-file-modified-sort="1771409639018" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1338">
 <div class="thumbnail"><a href="./posts/SSB import/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/SSB import/SSB_main.jpg" class="thumbnail-image">
@@ -479,7 +526,7 @@ Knut Solvig
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="bmV3cyUyQ2NvZGUlMkNhbmFseXNpcw==" data-listing-date-sort="1695679200000" data-listing-file-modified-sort="1711525989612" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="80">
+<div class="quarto-post image-right" data-index="9" data-categories="bmV3cyUyQ2NvZGUlMkNhbmFseXNpcw==" data-listing-date-sort="1695679200000" data-listing-file-modified-sort="1711525989612" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="80">
 <div class="thumbnail"><a href="./posts/Test blog from the Coding Corner/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/Test blog from the Coding Corner/titleimage.png" class="thumbnail-image">
@@ -513,7 +560,7 @@ Knut Solvig and Petter Knardahl
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="aG93LXRvJTJDY29kZSUyQ2Nhc2UlMkNzZWxlY3Rpb24lMkNxdWFudGl0YXRpdmU=" data-listing-date-sort="1693864800000" data-listing-file-modified-sort="1763643619915" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="203">
+<div class="quarto-post image-right" data-index="10" data-categories="aG93LXRvJTJDY29kZSUyQ2Nhc2UlMkNzZWxlY3Rpb24lMkNxdWFudGl0YXRpdmU=" data-listing-date-sort="1693864800000" data-listing-file-modified-sort="1763643619915" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="203">
 <div class="thumbnail"><a href="./posts/Case selection blog post/index.html" class="no-external">
 
 <img loading="lazy" src="./posts/Case selection blog post/titleimage.jpg" class="thumbnail-image">
@@ -605,13 +652,14 @@ Knut Solvig
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

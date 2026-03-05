@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Marie Langeland">
+<meta name="dcterms.date" content="2026-03-04">
+
+<title>How to import data from the OECD – KODEHJØRNET // THE CODING CORNER</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-5348f60334dd04cbc36623d8010fff4a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">KODEHJØRNET // THE CODING CORNER</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About this blog</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/kodehjornet/kodehjornet.github.io"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">How to import data from the OECD</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">how-to</div>
+                <div class="quarto-category">code</div>
+                <div class="quarto-category">OECD</div>
+                <div class="quarto-category">quantitative</div>
+                <div class="quarto-category">English</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Marie Langeland </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 4, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="what-is-the-oecd" class="level1">
+<h1>What is the OECD?</h1>
+<p>The Organisation for Economic Co-operation and Development (OECD) is an international organisation that provides data and research aimed at finding solutions to social, economic, and environmental challenges. It is one of the world’s largest and widely used sources of comparative data <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+</section>
+<section id="how-to-import-data-from-the-oecd-to-r" class="level1">
+<h1>How to import data from the OECD to R</h1>
+<p>This post provides a step-by-step guide to importing datasets from the OECD into R using the OECD package, from locating a dataset in the OECD Data Explorer to preparing the data for analysis and creating simple graphs.</p>
+<p>To make it clear which parts are universal across datasets and which may vary, the full process is demonstrated twice: once using a migration dataset and once using an unemployment dataset. The two examples are presented side by side, with each step first shown for the migration data and then repeated for the unemployment data.</p>
+<section id="step-1-install-and-load-the-necessary-packages" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-install-and-load-the-necessary-packages">Step 1: Install and load the necessary packages</h2>
+<p>First you need to install and load the OECD package<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, which allows you to retrieve data directly from the OECD API into R. You will also need to load the tidyverse package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github("expersso/OECD")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(OECD)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-2-find-a-dataset-using-the-oecd-data-explorer" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-find-a-dataset-using-the-oecd-data-explorer">Step 2: Find a dataset using the OECD Data Explorer</h2>
+<p>The OECD Data Explorer provides access to a wide range of data, including topics such as employment, migration, international trade, and economic outlook <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. The datasets are sorted by category, and it is also possible to search for specific topics using keywords.</p>
+<p><img src="OECD_data_explorer.png" class="img-fluid" width="800"></p>
+<p>The datasets included in this tutorial are the <em>International migration dataset</em> <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> and the <em>Labour force participation rate</em> dataset <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+</section>
+<section id="step-3-import-the-dataset-into-r" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-import-the-dataset-into-r">Step 3: Import the dataset into R</h2>
+<p><img src="migration_data.png" class="img-fluid" width="800"></p>
+<p>The next step, once you have found a dataset, is to filter the data under the “Refine your data selection”.</p>
+<p>In both examples below, only European countries were selected under <em>Reference area</em> (these must be chosen manually one by one). For <em>Sex</em>, only “Total” was selected. The filters included under “Refine your data selection” vary between datasets, so your selection may differ depending on which dataset you use.</p>
+<p>It is important not to select overlapping categories, because doing so can lead to the same observations being included multiple times. For example, in the <em>Labour force participation rate</em> dataset, choosing both “15 years or over” and “From 15 to 54 years” would cause all respondents aged 15-54 to be included twice. A similar issue occurs in the <em>International migration dataset</em> when filtering by citizenship if you select both individual countries one by one and “World”, as “World” already represents a selection of all countries.</p>
+<p>After refining the data selection, copy the links provided under <em>Developer API</em> into R. You will need two links: one containing information about what dataset you want, and one containing information about what filters you just refined by. Below, the dataset link is highlighted in yellow (between / and /), and the filters link is highlighted in purple (between / and ?). These two links will allow you to import the dataset into R with the selected filters.</p>
+<p><img src="developer_api.png" class="img-fluid" width="800"></p>
+<section id="import-migration-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="import-migration-dataset">Import Migration dataset</h3>
+<p>Back in R after filtering the data in the Data Portal, you first have to paste both the dataset ID link and the filter link you just found under <em>Developer API</em> into R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dataset_mig <span class="ot">&lt;-</span> <span class="st">"OECD.ELS.IMD,DSD_MIG@DF_MIG,1.0"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>filter_mig <span class="ot">&lt;-</span> <span class="st">"BEL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ITA+JPN+LVA+LTU+LUX+NLD+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+ISR+AUT.W.A.B11._T..."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Next, import the dataset using the <code>get_dataset()</code> function that comes with the <em>OECD</em> package:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>migdat <span class="ot">&lt;-</span> labelled<span class="sc">::</span><span class="fu">unlabelled</span>(<span class="fu">get_dataset</span>(dataset_mig, filter_mig))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="import-unemployment-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="import-unemployment-dataset">Import unemployment dataset</h3>
+<p>Now, we do the exact same thing for the unemployment data. Paste the links from the <em>Developer API</em> into R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dataset_unemp <span class="ot">&lt;-</span> <span class="st">"OECD.SDD.TPS,DSD_LFS@DF_IALFS_UNE_Q,1.0"</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>filter_unemp <span class="ot">&lt;-</span> <span class="st">"AUT+BEL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ITA+LVA+LTU+LUX+NLD+NOR+PRT+POL+SVK+SVN+ESP+SWE+CHE+GBR+TUR.UNE.._Z.Y._T.Y_GE15..A"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then, import the dataset with the selected filters:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>unemp <span class="ot">&lt;-</span> labelled<span class="sc">::</span><span class="fu">unlabelled</span>(<span class="fu">get_dataset</span>(dataset_unemp, filter_unemp))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="step-4-data-cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-data-cleaning">Step 4: Data cleaning</h2>
+<section id="retrieving-a-dataset-with-variable-information-and-merging" class="level3">
+<h3 class="anchored" data-anchor-id="retrieving-a-dataset-with-variable-information-and-merging">Retrieving a dataset with variable information and merging</h3>
+<section id="migration-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="migration-dataset">Migration dataset</h4>
+<p>Some of the variables in the dataset might not make sense at first glance. For example, in the <em>migdat</em> dataset the variable <code>MEASURE</code> has a value called “B11”, which is not very informative on its own.</p>
+<p>To understand what these codes mean, we can fetch a “data structure”. Use the <code>get_data_structure()</code> function on the dataset ID:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data_structure_migdat <span class="ot">&lt;-</span> <span class="fu">get_data_structure</span>(dataset_mig)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Next, inspect the variable names in both the data structure and the main dataset:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_structure_migdat, <span class="at">max.level =</span> <span class="dv">1</span>) <span class="co"># the data structure</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 12
+ $ VAR_DESC                :'data.frame':   15 obs. of  2 variables:
+ $ CL_AREA                 :'data.frame':   505 obs. of  2 variables:
+ $ CL_EDUCATION_LEV_ISCED11:'data.frame':   166 obs. of  2 variables:
+ $ CL_SEX                  :'data.frame':   7 obs. of  2 variables:
+ $ CL_UNIT_MEASURE         :'data.frame':   787 obs. of  2 variables:
+ $ CL_BIRTH_PLACE          :'data.frame':   4 obs. of  2 variables:
+ $ CL_MEASURE_MIG          :'data.frame':   12 obs. of  2 variables:
+ $ CL_MIGRATION_TYPE       :'data.frame':   14 obs. of  2 variables:
+ $ CL_DECIMALS             :'data.frame':   16 obs. of  2 variables:
+ $ CL_FREQ                 :'data.frame':   34 obs. of  2 variables:
+ $ CL_OBS_STATUS           :'data.frame':   20 obs. of  2 variables:
+ $ CL_UNIT_MULT            :'data.frame':   31 obs. of  4 variables:</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(migdat) <span class="co"># the actual dataset</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [752 × 13] (S3: tbl_df/tbl/data.frame)
+ $ BIRTH_PLACE  : chr [1:752] "_Z" "_Z" "_Z" "_Z" ...
+ $ CITIZENSHIP  : chr [1:752] "W" "W" "W" "W" ...
+ $ DECIMALS     : chr [1:752] "0" "0" "0" "0" ...
+ $ EDUCATION_LEV: chr [1:752] "_Z" "_Z" "_Z" "_Z" ...
+ $ FREQ         : chr [1:752] "A" "A" "A" "A" ...
+ $ MEASURE      : chr [1:752] "B11" "B11" "B11" "B11" ...
+ $ OBS_STATUS   : chr [1:752] "A" "A" "A" "A" ...
+ $ ObsValue     : chr [1:752] "83433" "1488" "63216" "7070" ...
+ $ REF_AREA     : chr [1:752] "BEL" "EST" "GRC" "ISL" ...
+ $ SEX          : chr [1:752] "_T" "_T" "_T" "_T" ...
+ $ TIME_PERIOD  : chr [1:752] "2006" "2006" "2006" "2006" ...
+ $ UNIT_MEASURE : chr [1:752] "PS" "PS" "PS" "PS" ...
+ $ UNIT_MULT    : chr [1:752] "0" "0" "0" "0" ...</code></pre>
+</div>
+</div>
+<p>We can check how the values in the <code>MEASURE</code> and <code>UNIT_MEASURE</code> variables are coded:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(migdat<span class="sc">$</span>MEASURE) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "B11"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(migdat<span class="sc">$</span>UNIT_MEASURE) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PS"</code></pre>
+</div>
+</div>
+<p>What does “B11” and “PS” mean? To find out, we will merge the labels from the data structure into our main dataset.</p>
+<p>First, we rename the variables in the data structure so that they match the variable names in our main dataset. This is necessary in order to merge the two datasets correctly.</p>
+<p>In the data structure, information about the <code>MEASURE</code> variable is found within the <code>CL_MEASURE_MIG</code> variable. Here, you can see “B11” and what that actually means.</p>
+<p>To be able to merge the data structure with the actual dataset, the column names must be identical in both datasets. We rename the first column in <code>CL_MEASURE_MIG</code> to <code>MEASURE</code>, so that it matches the main dataset.</p>
+<p>We then rename the second column to <code>MEASURE_LBL</code>. This new column will contain the information about the code - what “B11” actually mean.</p>
+<p>We repeat the same steps with the <code>UNIT_MEASURE</code> variable:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_structure_migdat<span class="sc">$</span>CL_MEASURE_MIG) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MEASURE"</span>, <span class="st">"MEASURE_LBL"</span>) </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_structure_migdat<span class="sc">$</span>CL_UNIT_MEASURE) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"UNIT_MEASURE"</span>, <span class="st">"UNIT_MEASURE_LBL"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, we merge the data structure into the main dataset. This adds two new variables: <code>MEASURE_LBL</code> and <code>UNIT_MEASURE_LBL</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>migdat <span class="ot">&lt;-</span> migdat <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(data_structure_migdat<span class="sc">$</span>CL_MEASURE_MIG, <span class="at">by =</span> <span class="st">"MEASURE"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(data_structure_migdat<span class="sc">$</span>CL_UNIT_MEASURE, <span class="at">by =</span> <span class="st">"UNIT_MEASURE"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You can now see that the two new explanatory variables have been added to the original dataset:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(migdat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   752 obs. of  15 variables:
+ $ UNIT_MEASURE    : chr  "PS" "PS" "PS" "PS" ...
+ $ MEASURE         : chr  "B11" "B11" "B11" "B11" ...
+ $ BIRTH_PLACE     : chr  "_Z" "_Z" "_Z" "_Z" ...
+ $ CITIZENSHIP     : chr  "W" "W" "W" "W" ...
+ $ DECIMALS        : chr  "0" "0" "0" "0" ...
+ $ EDUCATION_LEV   : chr  "_Z" "_Z" "_Z" "_Z" ...
+ $ FREQ            : chr  "A" "A" "A" "A" ...
+ $ OBS_STATUS      : chr  "A" "A" "A" "A" ...
+ $ ObsValue        : chr  "83433" "1488" "63216" "7070" ...
+ $ REF_AREA        : chr  "BEL" "EST" "GRC" "ISL" ...
+ $ SEX             : chr  "_T" "_T" "_T" "_T" ...
+ $ TIME_PERIOD     : chr  "2006" "2006" "2006" "2006" ...
+ $ UNIT_MULT       : chr  "0" "0" "0" "0" ...
+ $ MEASURE_LBL     : chr  "Inflows of foreign population" "Inflows of foreign population" "Inflows of foreign population" "Inflows of foreign population" ...
+ $ UNIT_MEASURE_LBL: chr  "Persons" "Persons" "Persons" "Persons" ...</code></pre>
+</div>
+</div>
+</section>
+<section id="unemployment-data" class="level4">
+<h4 class="anchored" data-anchor-id="unemployment-data">Unemployment data</h4>
+<p>Now, repeat the same steps as above with the unemployment dataset.</p>
+<p>First, fetch the data structure:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>data_structure_unemp <span class="ot">&lt;-</span> <span class="fu">get_data_structure</span>(dataset_unemp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then you check the names of the variables in both the data structure and the original dataset:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_structure_unemp, <span class="at">max.level =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 15
+ $ VAR_DESC               :'data.frame':    17 obs. of  2 variables:
+ $ CL_ACTIVITY_ISIC4      :'data.frame':    958 obs. of  2 variables:
+ $ CL_ADJUSTMENT          :'data.frame':    17 obs. of  2 variables:
+ $ CL_AGE                 :'data.frame':    308 obs. of  2 variables:
+ $ CL_AREA                :'data.frame':    469 obs. of  2 variables:
+ $ CL_SECTOR              :'data.frame':    216 obs. of  2 variables:
+ $ CL_SEX                 :'data.frame':    7 obs. of  2 variables:
+ $ CL_TRANSFORMATION      :'data.frame':    59 obs. of  2 variables:
+ $ CL_UNIT_MEASURE        :'data.frame':    670 obs. of  2 variables:
+ $ CL_WORKER_STATUS_ICSE93:'data.frame':    13 obs. of  2 variables:
+ $ CL_MEASURE_LFS_TPS     :'data.frame':    30 obs. of  2 variables:
+ $ CL_DECIMALS            :'data.frame':    16 obs. of  2 variables:
+ $ CL_FREQ                :'data.frame':    34 obs. of  2 variables:
+ $ CL_OBS_STATUS          :'data.frame':    20 obs. of  2 variables:
+ $ CL_UNIT_MULT           :'data.frame':    31 obs. of  4 variables:</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(unemp)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [1,325 × 14] (S3: tbl_df/tbl/data.frame)
+ $ ACTIVITY      : chr [1:1325] "_Z" "_Z" "_Z" "_Z" ...
+ $ ADJUSTMENT    : chr [1:1325] "Y" "Y" "Y" "Y" ...
+ $ AGE           : chr [1:1325] "Y_GE15" "Y_GE15" "Y_GE15" "Y_GE15" ...
+ $ DECIMALS      : chr [1:1325] "0" "0" "0" "0" ...
+ $ FREQ          : chr [1:1325] "A" "A" "A" "A" ...
+ $ MEASURE       : chr [1:1325] "UNE" "UNE" "UNE" "UNE" ...
+ $ OBS_STATUS    : chr [1:1325] "A" "A" "A" "A" ...
+ $ ObsValue      : chr [1:1325] "0" "215" "276" "406" ...
+ $ REF_AREA      : chr [1:1325] "GBR" "GBR" "GBR" "GBR" ...
+ $ SEX           : chr [1:1325] "_T" "_T" "_T" "_T" ...
+ $ TIME_PERIOD   : chr [1:1325] "1955" "1956" "1957" "1958" ...
+ $ TRANSFORMATION: chr [1:1325] "_Z" "_Z" "_Z" "_Z" ...
+ $ UNIT_MEASURE  : chr [1:1325] "PS" "PS" "PS" "PS" ...
+ $ UNIT_MULT     : chr [1:1325] "3" "3" "3" "3" ...</code></pre>
+</div>
+</div>
+<p>Check how the values in the <code>MEASURE</code> and <code>UNIT_MEASURE</code> variables are coded:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(unemp<span class="sc">$</span>MEASURE) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "UNE"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(unemp<span class="sc">$</span>UNIT_MEASURE) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "PS"</code></pre>
+</div>
+</div>
+<p>Rename the variables:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_structure_unemp<span class="sc">$</span>CL_MEASURE_LFS_TPS) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MEASURE"</span>, <span class="st">"MEASURE_LBL"</span>) </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_structure_unemp<span class="sc">$</span>CL_UNIT_MEASURE) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"UNIT_MEASURE"</span>, <span class="st">"UNIT_MEASURE_LBL"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Finally, merge the data structure into the original dataset:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>unemp <span class="ot">&lt;-</span> unemp <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(data_structure_unemp<span class="sc">$</span>CL_MEASURE_LFS_TPS, <span class="at">by =</span> <span class="st">"MEASURE"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(data_structure_unemp<span class="sc">$</span>CL_UNIT_MEASURE, <span class="at">by =</span> <span class="st">"UNIT_MEASURE"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="filter-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="filter-the-dataset">Filter the dataset</h3>
+<p>The next step is to select the relevant variables from the dataset. At the same time, we transform the <code>TIME_PERIOD</code> to a numeric variable.</p>
+<section id="migration-dataset-1" class="level4">
+<h4 class="anchored" data-anchor-id="migration-dataset-1">Migration dataset</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>migdat <span class="ot">&lt;-</span> migdat <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ObsValue, MEASURE, OBS_STATUS, REF_AREA, TIME_PERIOD) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TIME_PERIOD =</span> <span class="fu">as.numeric</span>(TIME_PERIOD),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ObsValue =</span> <span class="fu">as.numeric</span>(ObsValue))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Before doing any analysis, you should double check which years are included in the dataset. Even though you might have selected specific years when filtering the data in the OECD Data Portal, this selection does not always work. If there are years you do not want, you remove them by filtering the dataset to include only the years you want.</p>
+<p>Below, we filter to only include the years from 2000 to 2023:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(migdat<span class="sc">$</span>TIME_PERIOD) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 
+  20   20   20   25   23   23   23   23   23   24   26   26   27   27   27   28 
+2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 
+  27   28   28   28   28   29   29   29   29   28   28   28   28 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>migdat <span class="ot">&lt;-</span> migdat <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TIME_PERIOD <span class="sc">%in%</span> <span class="dv">2000</span><span class="sc">:</span><span class="dv">2023</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(migdat<span class="sc">$</span>TIME_PERIOD) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 
+  23   23   23   23   24   26   26   27   27   27   28   27   28   28   28   28 
+2016 2017 2018 2019 2020 2021 2022 2023 
+  29   29   29   29   28   28   28   28 </code></pre>
+</div>
+</div>
+</section>
+<section id="unemployment-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="unemployment-dataset">Unemployment dataset</h4>
+<p>Now we do the same steps for the unemployment dataset.</p>
+<p>First, filter the dataset to keep only the relevant variables and make the necessary transformations:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>unemp <span class="ot">&lt;-</span> unemp <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ObsValue, MEASURE, OBS_STATUS, REF_AREA, TIME_PERIOD) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TIME_PERIOD =</span> <span class="fu">as.numeric</span>(TIME_PERIOD),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ObsValue =</span> <span class="fu">as.numeric</span>(ObsValue))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Next, check which years are included and filter the dataset to only include the years you want:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(unemp<span class="sc">$</span>TIME_PERIOD) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+1955 1956 1957 1958 1959 1960 1961 1962 1963 1964 1965 1966 1967 1968 1969 1970 
+   2    7    7    7    8   10    9    9   10   12   13   12   13   12   13   13 
+1971 1972 1973 1974 1975 1976 1977 1978 1979 1980 1981 1982 1983 1984 1985 1986 
+  14   13   13   14   15   15   16   16   16   16   16   16   16   16   16   16 
+1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 
+  16   16   17   18   18   19   20   21   21   22   22   24   24   25   25   25 
+2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 
+  25   25   26   27   27   27   27   27   27   27   27   27   27   27   27   27 
+2019 2020 2021 2022 2023 2024 2025 
+  27   27   27   27   27   27    2 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>unemp <span class="ot">&lt;-</span> unemp <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(TIME_PERIOD <span class="sc">%in%</span> <span class="dv">2000</span><span class="sc">:</span><span class="dv">2023</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(unemp<span class="sc">$</span>TIME_PERIOD)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 
+  25   25   25   25   25   26   27   27   27   27   27   27   27   27   27   27 
+2016 2017 2018 2019 2020 2021 2022 2023 
+  27   27   27   27   27   27   27   27 </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="step-4-use-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-use-the-data">Step 4: Use the data</h2>
+<p>Now that the datasets are imported and cleaned, you can start using them. In this section, we will create a few simple graphs.</p>
+<p>When making graphs with large numbers (e.g.&nbsp;population measurements), the numbers can appear in scientific notation. To prevent this, use:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="migration-dataset-2" class="level3">
+<h3 class="anchored" data-anchor-id="migration-dataset-2">Migration dataset</h3>
+<p>One useful graph is a simple bar graph showing the average inflow of the foreign population for each country over the period 2000–2023:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>migdat <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MEASURE <span class="sc">==</span> <span class="st">"B11"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(REF_AREA) <span class="sc">%&gt;%</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_inflow =</span> <span class="fu">mean</span>(ObsValue, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_inflow, <span class="at">y =</span> <span class="fu">reorder</span>(REF_AREA, avg_inflow))) <span class="sc">+</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">title =</span> <span class="st">"Average inflow of foreign population (2000-2023)"</span>) <span class="sc">+</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can also create a line graph to see trends over time for selected countries. Choose the countries you are interested in:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>migdat <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REF_AREA <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DNK"</span>,<span class="st">"SWE"</span>,<span class="st">"NOR"</span>,<span class="st">"FIN"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> TIME_PERIOD, <span class="at">y =</span> ObsValue, <span class="at">group =</span> REF_AREA, <span class="at">color =</span> REF_AREA)) <span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span>) <span class="sc">+</span> <span class="co"># Colour blind friendly palette</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2000</span>,<span class="dv">2025</span>,<span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">150000</span>, <span class="dv">25000</span>)) <span class="sc">+</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">color =</span> <span class="st">"Country"</span>,</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Inflows of foreign population"</span>) <span class="sc">+</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="unemployment-dataset-1" class="level3">
+<h3 class="anchored" data-anchor-id="unemployment-dataset-1">Unemployment dataset</h3>
+<p>Similarly, you can create a bar graph showing the average unemployment level for each country over the period 2000–2023:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>unemp <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(MEASURE <span class="sc">==</span> <span class="st">"UNE"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(REF_AREA) <span class="sc">%&gt;%</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_unemp =</span> <span class="fu">mean</span>(ObsValue, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_unemp, <span class="at">y =</span> <span class="fu">reorder</span>(REF_AREA, avg_unemp))) <span class="sc">+</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">title =</span> <span class="st">"Average unemployment level (2000-2023)"</span>) <span class="sc">+</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And a line graph showing unemployment trends over time for selected countries:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>unemp <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REF_AREA <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DNK"</span>,<span class="st">"SWE"</span>,<span class="st">"NOR"</span>,<span class="st">"FIN"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> TIME_PERIOD, <span class="at">y =</span> ObsValue, <span class="at">group =</span> REF_AREA, <span class="at">color =</span> REF_AREA)) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Paired"</span>) <span class="sc">+</span> </span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">2000</span>,<span class="dv">2025</span>,<span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">150000</span>, <span class="dv">25000</span>)) <span class="sc">+</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">""</span>, <span class="at">color =</span> <span class="st">"Country"</span>,</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Unemployment trends"</span>) <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You should now be able to find and use OECD data independently - good luck!</p>
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.oecd.org/en/about/how-we-work.html" class="uri">https://www.oecd.org/en/about/how-we-work.html</a> ; <a href="https://www.oecd.org/en/about.html" class="uri">https://www.oecd.org/en/about.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The OECD package: <a href="https://github.com/expersso/OECD" class="uri">https://github.com/expersso/OECD</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The OECD Dataset Explorer: <a href="https://data-explorer.oecd.org/" class="uri">https://data-explorer.oecd.org/</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p><em>International migration database</em> dataset: <a href="https://data-explorer.oecd.org/vis?df%5Bds%5D=DisseminateFinalDMZ&amp;df%5Bid%5D=DSD_MIG%40DF_MIG&amp;df%5Bag%5D=OECD.ELS.IMD&amp;dq=.W.A.B11._T...&amp;pd=2012%2C&amp;to%5BTIME_PERIOD%5D=false" class="uri">https://data-explorer.oecd.org/vis?df%5Bds%5D=DisseminateFinalDMZ&amp;df%5Bid%5D=DSD_MIG%40DF_MIG&amp;df%5Bag%5D=OECD.ELS.IMD&amp;dq=.W.A.B11._T...&amp;pd=2012%2C&amp;to%5BTIME_PERIOD%5D=false</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p><em>Labour force participation rate</em> dataset: <a href="https://data-explorer.oecd.org/vis?df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_LFS%40DF_IALFS_LF_WAP_Q&amp;df%5Bag%5D=OECD.SDD.TPS&amp;df%5Bvs%5D=1.0&amp;pd=%2C&amp;dq=.LF_WAP.._Z.Y._T.Y15T64..Q&amp;to%5BTIME_PERIOD%5D=false" class="uri">https://data-explorer.oecd.org/vis?df%5Bds%5D=dsDisseminateFinalDMZ&amp;df%5Bid%5D=DSD_LFS%40DF_IALFS_LF_WAP_Q&amp;df%5Bag%5D=OECD.SDD.TPS&amp;df%5Bvs%5D=1.0&amp;pd=%2C&amp;dq=.LF_WAP.._Z.Y._T.Y15T64..Q&amp;to%5BTIME_PERIOD%5D=false</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

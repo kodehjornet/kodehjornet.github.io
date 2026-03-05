@@ -5,6 +5,7 @@ author:
     url:  "https://www.linkedin.com/in/kristine-vanebo-boe/"
 toc: true
 number-sections: true
+date: "2025-11-13"
 format:
   html: default
   pdf: default
@@ -36,8 +37,7 @@ Ved å spesifisere at jeg har lastet inn pakkene og at jeg bruker `tidyverse`, g
 
 ![](pe_fig4.png)
 
-
-Hvis jeg så legger til hvilket datasett jeg bruker, variablene jeg vil se på og landet jeg vil forholde meg til gir den meg en mye mer utfyllende kode på et histogram som jeg kan bruke direkte inn i `R`. 
+Hvis jeg så legger til hvilket datasett jeg bruker, variablene jeg vil se på og landet jeg vil forholde meg til gir den meg en mye mer utfyllende kode på et histogram som jeg kan bruke direkte inn i `R`.
 
 ![](pe_fig5.png)
 

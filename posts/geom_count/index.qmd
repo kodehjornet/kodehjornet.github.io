@@ -6,6 +6,7 @@ author:
   - name: Norman Sunde
     url: "https://www.linkedin.com/in/norman-sunde/"
 toc: true
+date: "2025-10-01"
 number-sections: true
 format:
   html: default
@@ -18,34 +19,38 @@ editor_options:
 
 ## Overlapping points & `geom_point()`
 
-The default way to visualize the relationship between two numeric variables is a scatterplot, which can be drawn with the `geom_point()` function in `ggplot2`. Often, however, we work with variables that are only *quasi-numeric*. These variables are, strictly speaking, not numeric but ordinal, yet they have enough categories to allow us to treat them as if they were numeric. Typical examples are measurements of political ideology on 0-10 left-right scales in public opinion surveys or measurements of trust in political actors in the *European Social Survey* (ESS), which are also on 0-10 scales. 
+The default way to visualize the relationship between two numeric variables is a scatterplot, which can be drawn with the `geom_point()` function in `ggplot2`. Often, however, we work with variables that are only *quasi-numeric*. These variables are, strictly speaking, not numeric but ordinal, yet they have enough categories to allow us to treat them as if they were numeric. Typical examples are measurements of political ideology on 0-10 left-right scales in public opinion surveys or measurements of trust in political actors in the *European Social Survey* (ESS), which are also on 0-10 scales.
 
 The problem with these variables is that observations can only have a limited number of values: The (integer) numbers from 0 to 10, but nothing in between. When plotting these types of variables with `geom_point()`, this leads to *overplotting*: many different observations that have the exact same values are "stacked" on top of each other. In this case, any patterns or relationships between the variables that are plotted are often difficult to see.
 
-The `geom_count()` function in `ggplot2` addresses this by adding up all duplicate values and then visualizing the number ("count") of all observations with same values in the form of differently sized circles. A LOESS curve can then be added to show the overall pattern without assuming a linear relationship. This technique is especially useful for quasi-continuous variables, such as political trust,
-happiness, or attitudes toward immigrants in the ESS.
+The `geom_count()` function in `ggplot2` addresses this by adding up all duplicate values and then visualizing the number ("count") of all observations with same values in the form of differently sized circles. A LOESS curve can then be added to show the overall pattern without assuming a linear relationship. This technique is especially useful for quasi-continuous variables, such as political trust, happiness, or attitudes toward immigrants in the ESS.
 
 We show how to do this with example data from the ESS as contained in the `bst290` package.
 
 ## Example analysis
+
 ### Setup & data management
+
 The following two packages are required for this:
+
 ```{r}
 library(tidyverse)
 library(bst290)
 ```
 
 Then we load the dataset:
+
 ```{r}
 ess <- bst290::ess
 ```
 
 We focus on the following two variables from the dataset:
 
- - `ppltrst`: Most people can be trusted (0-10)
- - `imwbcnt`: Immigrants make a country worse or better place to live (0-10)
+-   `ppltrst`: Most people can be trusted (0-10)
+-   `imwbcnt`: Immigrants make a country worse or better place to live (0-10)
 
 Before plotting, we convert these variables to the numeric format:
+
 ```{r}
 ess$ppltrst <- (as.numeric(ess$ppltrst)-1)
 ess$imwbcnt <- (as.numeric(ess$imwbcnt)-1)
@@ -54,6 +59,7 @@ ess$imwbcnt <- (as.numeric(ess$imwbcnt)-1)
 ### Preview: The final plot
 
 The code to plot the relationship between these variables (and the result) looks as follows:
+
 ```{r}
 ggplot(data = ess,
 aes(x = ppltrst,y = imwbcnt))+
@@ -68,7 +74,9 @@ theme_bw()
 ### The process, step-by-step
 
 #### Starting with ggplot()
+
 The `ggplot()` function is the foundation of any plot in `ggplot2`:
+
 ```{r}
 ggplot()
 ```
@@ -76,6 +84,7 @@ ggplot()
 #### Define the dataset
 
 Specify the dataset you want to use. In this case we are using the ESS practice dataset:
+
 ```{r}
 ggplot(data = ess)
 ```
@@ -83,16 +92,18 @@ ggplot(data = ess)
 #### Set the aesthetics (axes and variables)
 
 Define which variables you’d like to use and on which axes:
-````{r}
+
+```{r}
 ggplot(data = ess,
   aes(x = ppltrst, y = imwbcnt))
-````
+```
 
 This places `ppltrst` on the x-axis and `imwbcnt` on the y-axis. Your independent variable should always be on the x-axis (bottom) and your dependent variable should always be on the y-axis (the left side).
 
 #### Add graph contents with `geom_count()`
 
 The next step here is to add `geom_count()` to plot the overlapping points:
+
 ```{r}
 ggplot(data = ess,
   aes(x = ppltrst,y = imwbcnt))+
@@ -102,6 +113,7 @@ ggplot(data = ess,
 #### Add a smoothed trend line (LOESS)
 
 LOESS adds a smooth curve that highlights the average pattern, along with a 95% confidence band:
+
 ```{r}
 ggplot(data = ess,
   aes(x = ppltrst,y = imwbcnt))+
@@ -110,7 +122,9 @@ ggplot(data = ess,
 ```
 
 #### dd informative labels
+
 To finish your graph, add the labels to your axes and a title as you normally would:
+
 ```{r}
 ggplot(data = ess,
   aes(x = ppltrst,y = imwbcnt))+
@@ -125,6 +139,7 @@ ggplot(data = ess,
 #### Add theme
 
 Want to score some extra points with your professor? Add a more classic theme (look) to your graph:
+
 ```{r}
 ggplot(data = ess,
   aes(x = ppltrst,y = imwbcnt)) +
@@ -138,6 +153,7 @@ ggplot(data = ess,
 ```
 
 Or:
+
 ```{r}
 ggplot(data = ess,
   aes(x = ppltrst,y = imwbcnt))+
@@ -148,6 +164,3 @@ ggplot(data = ess,
   title = "Trust in people and attitude towards immigration")+
   theme_classic()
 ```
-
-
-
