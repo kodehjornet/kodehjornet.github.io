@@ -11,6 +11,6 @@ page-layout: full
 title-block-banner: true
 ---
 
-This is a blog on data analysis and coding with `R` by students at the University of Stavanger (UiS), Norway.
+This is a blog on data analysis and coding with `R` by political science students at the University of Stavanger (UiS), Norway.
 
 --- 
